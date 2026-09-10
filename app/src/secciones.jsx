@@ -288,13 +288,10 @@ const PuebloKankuamo = () => (
           />
         </div>
         <p className="parrafo">
-          Atánquez es una de sus doce comunidades. Allí ocurrió la masacre del 8 de diciembre
-          de 2002 — pero el ataque no se detuvo en ese día ni en ese pueblo.
-        </p>
-        <p className="parrafo">
-          En julio de 2004 la Corte Interamericana tuvo que ordenarle al Estado colombiano que
-          protegiera la vida de <strong>todos</strong> los miembros del pueblo kankuamo. Esa
-          orden no se dicta por un hecho aislado.
+          Atánquez es una de sus doce comunidades, y el ataque no se detuvo allí. En julio de
+          2004 la Corte Interamericana tuvo que ordenarle al Estado colombiano que protegiera
+          la vida de <strong>todos</strong> los miembros del pueblo kankuamo. Esa orden no se
+          dicta por un hecho aislado.
         </p>
         <Fuente codigo={MOMENTO_2.corteIDH.codigo} url={MOMENTO_2.corteIDH.url}>
           Corte Interamericana de Derechos Humanos, resolución del {MOMENTO_2.corteIDH.fecha}
@@ -424,64 +421,61 @@ const LaPopa = () => {
   return (
     <>
       <Encabezado periodo={p.fechaSentencia} lugar={`${p.unidad}, ${p.sede}`} bloque="Momento 2" />
-      <h2 className="titulo">Y un tribunal lo declaró probado.</h2>
+      <h2 className="titulo">Ciento treinta y cinco civiles, presentados como bajas en combate.</h2>
 
-      {/* Franja 1 — qué pasó, con las víctimas primero */}
+      {/* Las víctimas ocupan la lámina */}
       <div className="franja">
         <div className="franja__cifra">
           <span className="dato__valor cifra">{p.victimas}</span>
           <span className="dato__etiqueta">
-            civiles asesinados y presentados como bajas en combate, entre {p.periodo}
+            personas asesinadas entre {p.periodo}. Cada figura es una.
           </span>
         </div>
         <div className="franja__figuras">
           <CampoFiguras
             cantidad={p.victimas}
             unidad={1}
-            tam={12}
+            tam={15}
             maxFiguras={140}
             id="popa"
-            etiqueta={`${p.victimas} civiles asesinados por miembros del Batallón La Popa`}
+            etiqueta={`${p.victimas} civiles asesinados y presentados como bajas en combate`}
           />
         </div>
       </div>
 
-      {/* Franja 2 — quiénes */}
+      <div className="etnias">
+        <p className="rotulo" style={{ marginBottom: 'var(--s3)' }}>
+          De ellas, {p.victimasEtnicas.reduce((s, v) => s + v.n, 0)} acreditadas como víctimas
+          de pueblos indígenas y comunidades afrodescendientes
+        </p>
+        <ul>
+          {p.victimasEtnicas.map((v) => (
+            <li key={v.pueblo}>
+              <strong className="cifra">{v.n}</strong>
+              <span>{v.pueblo.replace('Personas ', '')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <hr className="regla regla--fina" />
+
+      {/* Los responsables, en voz baja */}
       <Alianza
-        izquierda={{ titulo: 'Batallón de Artillería No. 2 «La Popa»', detalle: `Fuerza pública · ${p.sede}` }}
-        derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'Grupo paramilitar' }}
-        nexo="alianza y connivencia sistemática entre la fuerza pública y el paramilitarismo"
+        izquierda={{ titulo: 'Batallón de Artillería No. 2 «La Popa»', detalle: `fuerza pública, ${p.sede}` }}
+        derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'grupo paramilitar' }}
+        nexo="alianza y connivencia sistemática"
         veredicto="declarado probado"
       />
 
-      {/* Franja 3 — qué consecuencia */}
-      <div className="terna">
-        <div>
-          <span className="terna__valor cifra">{p.sancionados}</span>
-          <span className="terna__etq">
-            militares sancionados, todos en retiro —{' '}
-            {p.composicion.map((c) => `${c.n} ${c.rango.toLowerCase()}`).join(', ')}
-          </span>
-        </div>
-        <div>
-          <span className="terna__valor cifra">8</span>
-          <span className="terna__etq">años de sanción propia, la máxima impuesta</span>
-        </div>
-        <div>
-          <span className="terna__valor cifra">
-            {p.victimasEtnicas.reduce((s, v) => s + v.n, 0)}
-          </span>
-          <span className="terna__etq">
-            víctimas acreditadas de pueblos indígenas y comunidades afrodescendientes —{' '}
-            {p.victimasEtnicas
-              .map((v) => `${v.n} ${v.pueblo.replace('Pueblo ', '').replace('Personas ', '')}`)
-              .join(', ')}
-          </span>
-        </div>
-      </div>
+      <p className="pie" style={{ marginTop: 'var(--s3)' }}>
+        {p.sancionados} militares sancionados, todos en retiro:{' '}
+        {p.composicion.map((c) => `${c.n} ${c.rango.toLowerCase()}`).join(', ')}. Sanción
+        máxima: {p.sancionMaxima}. {p.nota}
+      </p>
 
       <Fuente codigo={p.codigo} url={p.url}>
-        {p.organo}, sentencia del {p.fechaSentencia}. {p.nota}
+        {p.organo}, sentencia del {p.fechaSentencia}
       </Fuente>
     </>
   )

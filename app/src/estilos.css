@@ -618,11 +618,24 @@ kbd {
 /* Proyectores de sala: 1024×768 y similares. Recuperar el aire vertical del
    padding evita que las láminas más densas queden con barra de desplazamiento. */
 @media (max-height: 820px) {
+  :root {
+    /* Las cifras enormes son lo primero que desborda en pantallas bajas */
+    --t-3xl: clamp(2.1rem, 4.4vw, 3.3rem);
+    --t-2xl: clamp(1.9rem, 3.6vw, 2.9rem);
+    --t-cartel: clamp(2.6rem, 9vw, 7rem);
+  }
   .lamina {
     padding-block: clamp(0.75rem, 2.5vh, 1.75rem);
   }
   .datos {
-    gap: var(--s4) var(--s7);
+    gap: var(--s3) var(--s6);
+    margin-block: var(--s4);
+  }
+  .parrafo {
+    margin-bottom: var(--s3);
+  }
+  .mapaco__svg {
+    max-width: 420px;
   }
 }
 

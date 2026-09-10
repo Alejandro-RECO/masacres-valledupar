@@ -261,63 +261,44 @@
   max-width: 26ch;
 }
 
-/* Franja 2: los dos actores enfrentados en una sola línea. */
-.alianza2 {
-  margin-bottom: var(--s6);
-}
-
-.alianza2__fila {
-  display: grid;
+/* Víctimas acreditadas de pueblos indígenas y comunidades afro. */
+.etnias ul {
+  display: flex;
+  flex-wrap: wrap;
   gap: 2px;
-  align-items: stretch;
 }
 
-@media (min-width: 760px) {
-  .alianza2__fila {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  }
-}
-
-.alianza2__actor {
+.etnias li {
   background: var(--superficie);
-  padding: var(--s4) var(--s5);
-  display: grid;
-  gap: 2px;
-  align-content: center;
+  padding: var(--s3) var(--s5);
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
 }
 
-.alianza2__actor strong {
-  font-size: var(--t-md);
-  font-weight: 700;
-  line-height: 1.2;
-  color: var(--texto);
-}
-
-.alianza2__actor span {
-  font-size: var(--t-sm);
-  color: var(--texto-2);
-}
-
-.alianza2__nexo {
-  background: var(--marca);
-  color: var(--fondo);
+.etnias strong {
   font-family: var(--cartel);
-  font-size: var(--t-xl);
+  font-size: var(--t-lg);
   line-height: 1;
-  display: grid;
-  place-items: center;
-  padding-inline: var(--s5);
-  min-height: 56px;
+  color: var(--marca);
 }
 
-.alianza2__pie {
+.etnias span {
+  font-size: var(--t-sm);
+  color: var(--texto);
+  font-weight: 500;
+}
+
+/* Los responsables: una línea, en voz baja. */
+.alianza2 {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: var(--s3);
-  margin-top: var(--s3);
   font-size: var(--t-sm);
+  line-height: 1.5;
   color: var(--texto-2);
+  max-width: 92ch;
 }
 
 .alianza2__sello {
@@ -331,35 +312,9 @@
   flex: none;
 }
 
-/* Franja 3: tres consecuencias en paralelo. */
-.terna {
-  display: grid;
-  gap: var(--s5) var(--s6);
-  padding-top: var(--s5);
-  border-top: 2px solid var(--texto);
-}
-
-@media (min-width: 800px) {
-  .terna {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.terna__valor {
-  display: block;
-  font-family: var(--cartel);
-  font-size: var(--t-xl);
-  line-height: 1;
-  color: var(--acento);
-}
-
-.terna__etq {
-  display: block;
-  font-size: var(--t-sm);
-  line-height: 1.4;
-  color: var(--texto-2);
-  margin-top: var(--s2);
-  max-width: 34ch;
+.alianza2__texto strong {
+  color: var(--texto);
+  font-weight: 600;
 }
 
 /* ── Mapa nacional, vectorizado del documento ──────────────── */

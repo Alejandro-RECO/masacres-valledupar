@@ -248,17 +248,21 @@ advierte: todos fueron crueles, pero de manera diferente.*
 
 ### Lámina 13 — La sentencia · 45 s
 
-*Y eso no quedó en denuncia. El 18 de septiembre de 2025 la Jurisdicción Especial
-para la Paz sancionó a doce exintegrantes del Batallón La Popa, con sede en
-Valledupar, por 135 civiles asesinados y presentados como bajas en combate.*
+**Empiece por las figuras, no por el batallón.**
 
-*Entre las víctimas acreditadas hay diez del pueblo kankuamo y cuatro del pueblo
-wiwa.*
+*Ciento treinta y cinco civiles asesinados entre 2002 y 2005, y presentados como
+bajas en combate. Cada figura de la pantalla es una persona.*
 
-**Señale el diagrama.**
+*De ellas, veinte están acreditadas como víctimas de pueblos indígenas y
+comunidades afrodescendientes: diez del pueblo kankuamo, cuatro del pueblo wiwa y
+seis personas afrodescendientes.*
 
-*La sentencia declaró probado que hubo alianza y connivencia sistemática entre
-miembros de la fuerza pública y el Bloque Norte de las AUC.*
+**Ahora sí, los responsables.**
+
+*El 18 de septiembre de 2025 la Jurisdicción Especial para la Paz declaró probada
+la alianza y connivencia sistemática entre el Batallón La Popa, con sede en
+Valledupar, y el Bloque Norte de las AUC. Sancionó a doce militares, todos en
+retiro.*
 
 **→ Entrega:** *En 2006 esas estructuras entregaron las armas. Veamos qué quedó.*
 

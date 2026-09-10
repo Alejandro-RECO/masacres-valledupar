@@ -187,36 +187,21 @@ export function RangosPeriodo({ rangos, desde, hasta }) {
    ═══════════════════════════════════════════════════════════════ */
 
 /**
- * La alianza entre dos actores, como franja horizontal.
+ * Lo que la sentencia declaró probado sobre los responsables.
  *
- * Sustituye a un diagrama de cajas y flechas que quedaba flotando en una
- * esquina y desaprovechaba la lámina. Aquí los dos actores se enfrentan en una
- * sola línea, unidos por un signo: se lee de un golpe, ocupa el ancho completo
- * y no necesita explicación.
+ * Va deliberadamente en voz baja. Una versión anterior daba a los dos actores
+ * armados dos bloques grandes y un signo «+» en color: los perpetradores
+ * terminaban siendo el elemento más llamativo de una lámina que trata sobre
+ * personas asesinadas. Aquí ocupan una línea.
  */
 export function Alianza({ izquierda, derecha, nexo, veredicto }) {
   return (
-    <div className="alianza2">
-      <div className="alianza2__fila">
-        <div className="alianza2__actor">
-          <strong>{izquierda.titulo}</strong>
-          <span>{izquierda.detalle}</span>
-        </div>
-
-        <div className="alianza2__nexo" aria-hidden="true">
-          +
-        </div>
-
-        <div className="alianza2__actor">
-          <strong>{derecha.titulo}</strong>
-          <span>{derecha.detalle}</span>
-        </div>
-      </div>
-
-      <p className="alianza2__pie">
-        <span className="alianza2__sello">{veredicto}</span>
-        {nexo}
-      </p>
-    </div>
+    <p className="alianza2">
+      <span className="alianza2__sello">{veredicto}</span>
+      <span className="alianza2__texto">
+        {nexo} entre <strong>{izquierda.titulo}</strong> ({izquierda.detalle}) y{' '}
+        <strong>{derecha.titulo}</strong> ({derecha.detalle}).
+      </span>
+    </p>
   )
 }
