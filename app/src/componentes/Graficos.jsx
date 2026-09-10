@@ -187,85 +187,36 @@ export function RangosPeriodo({ rangos, desde, hasta }) {
    ═══════════════════════════════════════════════════════════════ */
 
 /**
- * Dos actores que confluyen en un resultado.
+ * La alianza entre dos actores, como franja horizontal.
  *
- * La versión anterior bajaba una vertical desde cada caja y las unía con una
- * horizontal: entre las tres líneas se formaba un rectángulo incompleto que se
- * leía como una caja mal dibujada. Aquí la unión es una T limpia —dos bajadas
- * cortas, una horizontal, un único tronco al centro— y la etiqueta corta la
- * horizontal con un halo, para que se lea como rótulo de la unión y no como
- * texto encerrado.
+ * Sustituye a un diagrama de cajas y flechas que quedaba flotando en una
+ * esquina y desaprovechaba la lámina. Aquí los dos actores se enfrentan en una
+ * sola línea, unidos por un signo: se lee de un golpe, ocupa el ancho completo
+ * y no necesita explicación.
  */
-export function DiagramaAlianza({ izquierda, derecha, centro, resultado, nota }) {
-  const id = useId()
-  const yCajas = 78 // borde inferior de las cajas de actor
-  const yUnion = 118 // altura de la horizontal que las une
-  const xA = 135
-  const xB = 485
-  const xC = 310
-
+export function Alianza({ izquierda, derecha, nexo, veredicto }) {
   return (
-    <figure className="alianza">
-      <svg
-        viewBox="0 0 620 250"
-        className="alianza__svg"
-        role="img"
-        aria-label={`${izquierda.titulo} y ${derecha.titulo} confluyen en ${centro}. Resultado: ${resultado}.`}
-      >
-        <defs>
-          <marker
-            id={`f-${id}`}
-            markerWidth="10"
-            markerHeight="10"
-            refX="8"
-            refY="5"
-            orient="auto"
-          >
-            <path d="M0 0 L10 5 L0 10 z" fill="var(--texto-2)" />
-          </marker>
-        </defs>
+    <div className="alianza2">
+      <div className="alianza2__fila">
+        <div className="alianza2__actor">
+          <strong>{izquierda.titulo}</strong>
+          <span>{izquierda.detalle}</span>
+        </div>
 
-        <g>
-          <rect x="10" y="8" width="250" height="70" fill="none" stroke="var(--regla)" strokeWidth="2" />
-          <text x="28" y="38" className="alianza__t1">{izquierda.titulo}</text>
-          <text x="28" y="60" className="alianza__t2">{izquierda.detalle}</text>
-        </g>
-        <g>
-          <rect x="360" y="8" width="250" height="70" fill="none" stroke="var(--regla)" strokeWidth="2" />
-          <text x="378" y="38" className="alianza__t1">{derecha.titulo}</text>
-          <text x="378" y="60" className="alianza__t2">{derecha.detalle}</text>
-        </g>
+        <div className="alianza2__nexo" aria-hidden="true">
+          +
+        </div>
 
-        {/* Unión en T: dos bajadas, una horizontal, un tronco */}
-        <path
-          d={`M${xA} ${yCajas} L${xA} ${yUnion} L${xB} ${yUnion} M${xB} ${yCajas} L${xB} ${yUnion}`}
-          fill="none"
-          stroke="var(--texto-2)"
-          strokeWidth="2"
-        />
-        <path
-          d={`M${xC} ${yUnion} L${xC} 168`}
-          fill="none"
-          stroke="var(--texto-2)"
-          strokeWidth="2"
-          markerEnd={`url(#f-${id})`}
-        />
+        <div className="alianza2__actor">
+          <strong>{derecha.titulo}</strong>
+          <span>{derecha.detalle}</span>
+        </div>
+      </div>
 
-        {/* El halo corta la horizontal para que la etiqueta rotule la unión */}
-        <text x={xC} y={yUnion + 5} textAnchor="middle" className="alianza__t3">
-          {centro}
-        </text>
-
-        <rect x="90" y="176" width="440" height="66" fill="var(--marca)" />
-        <text x="310" y="204" textAnchor="middle" className="alianza__t4">
-          {resultado}
-        </text>
-        {nota && (
-          <text x="310" y="226" textAnchor="middle" className="alianza__t5">
-            {nota}
-          </text>
-        )}
-      </svg>
-    </figure>
+      <p className="alianza2__pie">
+        <span className="alianza2__sello">{veredicto}</span>
+        {nexo}
+      </p>
+    </div>
   )
 }

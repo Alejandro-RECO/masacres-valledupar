@@ -14,7 +14,7 @@ import {
   DESCARTADOS,
 } from './datos'
 import { CampoFiguras, Umbral } from './componentes/Figura'
-import { BarrasActores, Proporcion, DiagramaAlianza } from './componentes/Graficos'
+import { BarrasActores, Proporcion, Alianza } from './componentes/Graficos'
 import { DiagramaTerritorio } from './componentes/Mapa'
 import { MapaColombia } from './componentes/MapaColombia'
 import { LineaTiempo } from './componentes/LineaTiempo'
@@ -425,48 +425,64 @@ const LaPopa = () => {
     <>
       <Encabezado periodo={p.fechaSentencia} lugar={`${p.unidad}, ${p.sede}`} bloque="Momento 2" />
       <h2 className="titulo">Y un tribunal lo declaró probado.</h2>
-      <div className="duo duo--60-40">
-        <div>
-          <DiagramaAlianza
-            izquierda={{ titulo: 'Batallón de Artillería No. 2 «La Popa»', detalle: `Fuerza pública · ${p.sede}` }}
-            derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'Paramilitares' }}
-            centro="alianza y connivencia sistemática"
-            resultado={`${p.victimas} civiles asesinados`}
-            nota="y presentados como bajas en combate, entre 2002 y 2005"
-          />
-          <Fuente codigo={p.codigo} url={p.url}>
-            {p.organo}, sentencia del {p.fechaSentencia}
-          </Fuente>
+
+      {/* Franja 1 — qué pasó, con las víctimas primero */}
+      <div className="franja">
+        <div className="franja__cifra">
+          <span className="dato__valor cifra">{p.victimas}</span>
+          <span className="dato__etiqueta">
+            civiles asesinados y presentados como bajas en combate, entre {p.periodo}
+          </span>
         </div>
-        <div>
-          <div className="datos">
-            <Dato valor={p.sancionados} etiqueta="militares sancionados, todos en retiro" />
-          </div>
-          <ul className="puntos" style={{ marginBottom: 'var(--s5)' }}>
-            {p.composicion.map((c) => (
-              <li key={c.rango}>
-                <span>
-                  {c.n} {c.rango.toLowerCase()}
-                </span>
-              </li>
-            ))}
-            <li>
-              <span>{p.sancionMaxima}</span>
-            </li>
-          </ul>
-          <p className="rotulo">Entre las víctimas acreditadas</p>
-          <ul className="puntos">
-            {p.victimasEtnicas.map((v) => (
-              <li key={v.pueblo}>
-                <span>
-                  <strong>{v.n}</strong> — {v.pueblo}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="pie">{p.nota}</p>
+        <div className="franja__figuras">
+          <CampoFiguras
+            cantidad={p.victimas}
+            unidad={1}
+            tam={12}
+            maxFiguras={140}
+            id="popa"
+            etiqueta={`${p.victimas} civiles asesinados por miembros del Batallón La Popa`}
+          />
         </div>
       </div>
+
+      {/* Franja 2 — quiénes */}
+      <Alianza
+        izquierda={{ titulo: 'Batallón de Artillería No. 2 «La Popa»', detalle: `Fuerza pública · ${p.sede}` }}
+        derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'Grupo paramilitar' }}
+        nexo="alianza y connivencia sistemática entre la fuerza pública y el paramilitarismo"
+        veredicto="declarado probado"
+      />
+
+      {/* Franja 3 — qué consecuencia */}
+      <div className="terna">
+        <div>
+          <span className="terna__valor cifra">{p.sancionados}</span>
+          <span className="terna__etq">
+            militares sancionados, todos en retiro —{' '}
+            {p.composicion.map((c) => `${c.n} ${c.rango.toLowerCase()}`).join(', ')}
+          </span>
+        </div>
+        <div>
+          <span className="terna__valor cifra">8</span>
+          <span className="terna__etq">años de sanción propia, la máxima impuesta</span>
+        </div>
+        <div>
+          <span className="terna__valor cifra">
+            {p.victimasEtnicas.reduce((s, v) => s + v.n, 0)}
+          </span>
+          <span className="terna__etq">
+            víctimas acreditadas de pueblos indígenas y comunidades afrodescendientes —{' '}
+            {p.victimasEtnicas
+              .map((v) => `${v.n} ${v.pueblo.replace('Pueblo ', '').replace('Personas ', '')}`)
+              .join(', ')}
+          </span>
+        </div>
+      </div>
+
+      <Fuente codigo={p.codigo} url={p.url}>
+        {p.organo}, sentencia del {p.fechaSentencia}. {p.nota}
+      </Fuente>
     </>
   )
 }
