@@ -1,0 +1,41 @@
+/**
+ * Mapa de Colombia — datos vectoriales.
+ *
+ * NO es un mapa dibujado a mano ni descargado de un tercero. La silueta y las
+ * coordenadas de los quince municipios se extrajeron del mapa «Municipios en
+ * estado crítico» de la infografía de MASACRES del Módulo 1 (CNMH, pág. 11),
+ * vectorizando el original: umbral de color sobre el render del PDF a 500 ppp,
+ * relleno de huecos, trazado de contorno de Moore y simplificación
+ * Douglas–Peucker. La superposición del trazo sobre el original se verificó
+ * visualmente antes de fijar estos valores.
+ *
+ * Por eso el mapa se puede afirmar como dato: es el mapa del documento base.
+ *
+ * El viewBox está ajustado al contorno, con margen para el anillo de énfasis.
+ */
+
+export const VIEW_BOX = '267.8 -14.0 578.6 565.6'
+
+export const COLOMBIA = 'M502.9 0.0L524.6 0.0L528.9 4.3L533.2 0.0L592.5 0.0L586.7 7.2L575.1 14.5L570.8 28.9L556.4 47.7L559.2 50.6L554.9 59.2L556.4 69.4L540.5 95.4L544.8 98.3L552.0 93.9L562.1 104.0L554.9 112.7L556.4 119.9L562.1 124.3L570.8 122.8L582.4 134.4L582.4 150.3L576.6 156.1L570.8 154.6L560.7 164.7L569.4 173.4L576.6 170.5L583.8 179.2L589.6 179.2L599.7 200.9L604.0 200.9L608.4 196.5L632.9 196.5L637.3 200.9L646.0 200.9L653.2 193.6L664.7 193.6L670.5 200.9L689.3 200.9L699.4 213.9L698.0 218.2L692.2 218.2L685.0 211.0L677.7 211.0L672.0 218.2L672.0 228.3L676.3 232.7L712.4 232.7L718.2 239.9L726.9 239.9L734.1 232.7L754.3 238.4L757.2 235.5L770.2 235.5L773.1 232.7L784.7 232.7L793.4 228.3L796.2 231.2L803.5 231.2L807.8 239.9L807.8 242.8L800.6 250.0L800.6 264.5L789.0 274.6L789.0 310.7L793.4 316.5L791.9 322.3L796.2 329.5L797.7 341.0L807.8 348.3L809.2 355.5L813.6 359.8L813.6 365.6L791.9 387.3L794.8 390.2L800.6 390.2L819.4 409.0L819.4 417.6L823.7 422.0L822.3 426.3L826.6 430.6L826.6 436.4L830.9 443.6L832.4 461.0L828.0 461.0L828.0 452.3L822.3 437.9L807.8 419.1L789.0 437.9L776.0 426.3L771.7 430.6L770.2 437.9L721.1 437.9L718.2 435.0L705.2 435.0L699.4 440.8L699.4 463.9L702.3 466.8L725.4 469.7L728.3 472.5L729.8 482.7L725.4 487.0L721.1 487.0L716.8 482.7L709.5 484.1L702.3 489.9L695.1 489.9L690.8 494.2L690.8 526.0L703.8 537.6L685.0 537.6L680.6 533.2L674.9 537.6L670.5 534.7L667.6 537.6L530.3 537.6L527.5 534.7L517.3 537.6L513.0 531.8L507.2 537.6L488.4 537.6L474.0 524.6L468.2 524.6L459.5 517.3L445.1 517.3L436.4 511.6L430.6 513.0L414.7 498.6L406.1 494.2L401.7 495.7L396.0 502.9L372.8 501.4L368.5 497.1L361.3 498.6L354.0 495.7L352.6 488.4L342.5 482.7L343.9 478.3L341.0 475.4L328.0 478.3L313.6 465.3L309.2 465.3L303.5 459.5L294.8 456.6L281.8 442.2L281.8 436.4L286.1 432.1L294.8 432.1L299.1 435.0L303.5 430.6L297.7 422.0L300.6 414.7L300.6 403.2L304.9 398.8L310.7 400.3L316.5 394.5L326.6 397.4L332.4 393.1L342.5 382.9L342.5 378.6L358.4 355.5L364.2 349.7L372.8 348.3L377.2 343.9L375.7 338.2L369.9 332.4L364.2 332.4L359.8 328.0L356.9 330.9L354.0 328.0L356.9 323.7L354.0 317.9L356.9 315.0L358.4 300.6L361.3 297.7L356.9 293.4L356.9 278.9L354.0 276.0L356.9 271.7L351.2 261.6L361.3 252.9L356.9 235.5L354.0 232.7L358.4 215.3L354.0 206.6L349.7 206.6L345.4 202.3L341.0 205.2L338.2 202.3L343.9 196.5L333.8 186.4L333.8 180.6L341.0 170.5L342.5 169.1L346.8 172.0L365.6 153.2L365.6 147.4L358.4 138.7L358.4 132.9L354.0 125.7L356.9 122.8L371.4 135.8L375.7 150.3L381.5 156.1L390.2 153.2L394.5 146.0L384.4 135.8L380.1 122.8L400.3 111.3L413.3 96.8L413.3 92.5L422.0 85.3L430.6 85.3L433.5 88.2L439.3 82.4L436.4 66.5L443.6 57.8L443.6 33.2L468.2 13.0L478.3 13.0L481.2 21.7L489.9 27.5L500.0 18.8L500.0 2.9L502.9 0.0Z'
+
+/** Los quince municipios que el GMH marcó en estado crítico por masacres. */
+export const MUNICIPIOS_CRITICOS = [
+  { nombre: "Ciénaga", x: 489.6, y: 18.3 },
+  { nombre: "Valledupar", x: 542.2, y: 47.9 },
+  { nombre: "Agustín Codazzi", x: 505.7, y: 69.5 },
+  { nombre: "El Carmen de Bolívar", x: 449.3, y: 85.4 },
+  { nombre: "Tibú", x: 564.0, y: 115.1 },
+  { nombre: "Tierralta", x: 428.5, y: 144.6 },
+  { nombre: "Turbo", x: 385.0, y: 147.2 },
+  { nombre: "Cúcuta", x: 572.0, y: 164.3 },
+  { nombre: "Apartadó", x: 387.9, y: 164.9 },
+  { nombre: "Barrancabermeja", x: 519.3, y: 199.2 },
+  { nombre: "Remedios", x: 468.2, y: 207.6 },
+  { nombre: "Cimitarra", x: 527.9, y: 224.3 },
+  { nombre: "Medellín", x: 431.2, y: 234.4 },
+  { nombre: "San Carlos", x: 454.1, y: 234.4 },
+  { nombre: "Buenaventura", x: 367.5, y: 341.8 },
+]
+
+export const FUENTE_MAPA =
+  'Módulo 1, Cátedra Basta Ya (CNMH), infografía «Masacres», mapa «Municipios en estado crítico», pág. 11'

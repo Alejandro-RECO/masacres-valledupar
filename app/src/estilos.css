@@ -1,0 +1,651 @@
+/* ═══════════════════════════════════════════════════════════════
+   Masacres en Valledupar — Cátedra Basta Ya
+   Sistema visual derivado de modulo1.pdf (CNMH).
+   Colores muestreados del PDF, no inventados. Ver docs/00-plan-de-diseno.md
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Color — todos muestreados del documento original */
+  --papel: #f0f0f0;
+  --papel-hondo: #e4e4e2;
+  --papel-borde: #d2d4d3;
+  --tinta: #231f20;
+  --tinta-alta: #14100f;
+  --carbon: #2c2f31;
+  --turquesa: #09b9a7;
+  --ambar: #f6a340;
+  --terracota: #7e3d1e;
+  --granate: #941a20;
+  --pizarra: #76797b;
+  --pizarra-clara: #a8abac;
+
+  /* Roles por registro. Se redefinen dentro de .reg-tinta */
+  --fondo: var(--papel);
+  --texto: var(--tinta);
+  --texto-2: var(--pizarra);
+  --titulo: var(--carbon);
+  --acento: var(--terracota);
+  --grave: var(--granate);
+  --regla: var(--papel-borde);
+  --superficie: var(--papel-hondo);
+
+  /* Tipografía */
+  --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --cartel: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-base: 1rem;
+  --t-md: 1.2rem;
+  --t-lg: clamp(1.35rem, 1.9vw, 1.75rem);
+  --t-xl: clamp(1.7rem, 2.8vw, 2.4rem);
+  --t-2xl: clamp(2.2rem, 4.2vw, 3.4rem);
+  --t-3xl: clamp(2.8rem, 6vw, 4.8rem);
+  --t-cartel: clamp(3rem, 11vw, 9.5rem);
+
+  /* Espacio */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+  --s9: 6rem;
+
+  --riel: 46px;
+  --medida: 62ch;
+  --transicion: 420ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  color-scheme: light;
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: clamp(15px, 1.05vw, 17.5px);
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--papel);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+/* Numerales tabulares en todo dato: las cifras deben alinearse */
+.cifra,
+.tabular,
+td,
+th {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+:focus-visible {
+  outline: 3px solid var(--turquesa);
+  outline-offset: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Los dos registros
+   ═══════════════════════════════════════════════════════════════ */
+
+.reg-papel {
+  --fondo: var(--papel);
+  --texto: var(--tinta);
+  --texto-2: var(--pizarra);
+  --titulo: var(--carbon);
+  --acento: var(--terracota);
+  --grave: var(--granate);
+  --regla: var(--papel-borde);
+  --superficie: var(--papel-hondo);
+  --marca: var(--terracota);
+  --marca-2: var(--pizarra-clara);
+}
+
+.reg-tinta {
+  --fondo: var(--tinta);
+  --texto: #ece9e6;
+  --texto-2: #9a9490;
+  --titulo: #f5f2ef;
+  --acento: var(--ambar);
+  --grave: var(--turquesa);
+  --regla: #3d3836;
+  --superficie: #2e2926;
+  --marca: var(--ambar);
+  --marca-2: #4d4744;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Estructura de la presentación
+   ═══════════════════════════════════════════════════════════════ */
+
+.escena {
+  position: fixed;
+  inset: 0;
+  padding-right: var(--riel);
+  background: var(--fondo);
+  color: var(--texto);
+  transition: background var(--transicion), color var(--transicion);
+}
+
+.lamina {
+  position: absolute;
+  inset: 0;
+  padding-right: var(--riel);
+  display: grid;
+  align-content: center;
+  padding-inline: clamp(1.5rem, 6vw, 6rem);
+  padding-block: clamp(2rem, 5vh, 4rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transicion), visibility var(--transicion);
+}
+
+.lamina[data-activa='true'] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lamina__interior {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+/* ── Riel de navegación ────────────────────────────────────────
+   Es la banda turquesa vertical del PDF, convertida en interfaz. */
+
+.riel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--riel);
+  background: var(--turquesa);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--s4);
+  z-index: 40;
+}
+
+.riel__bloque {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-weight: 600;
+  font-size: var(--t-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #04322d;
+  user-select: none;
+}
+
+.riel__marcas {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.riel__marca {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #04322d;
+  opacity: 0.28;
+  transition: opacity 200ms, transform 200ms;
+  padding: 0;
+}
+
+.riel__marca[data-vista='true'] {
+  opacity: 0.55;
+}
+
+.riel__marca[data-actual='true'] {
+  opacity: 1;
+  transform: scale(1.6);
+}
+
+.riel__contador {
+  writing-mode: vertical-rl;
+  font-size: var(--t-xs);
+  font-weight: 600;
+  color: #04322d;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Encabezado de lámina ──────────────────────────────────── */
+
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s3) var(--s5);
+  margin-bottom: var(--s5);
+  color: var(--texto-2);
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.encabezado__periodo {
+  color: var(--acento);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Títulos ───────────────────────────────────────────────── */
+
+.cartel {
+  font-family: var(--cartel);
+  font-size: var(--t-cartel);
+  line-height: 0.86;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: var(--titulo);
+  margin-block: var(--s3) var(--s5);
+  overflow-wrap: break-word;
+}
+
+.titulo {
+  font-size: var(--t-2xl);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--titulo);
+  margin-bottom: var(--s4);
+}
+
+.subtitulo {
+  font-size: var(--t-lg);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--titulo);
+  margin-bottom: var(--s3);
+}
+
+.rotulo {
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--texto-2);
+  margin-bottom: var(--s2);
+}
+
+.parrafo {
+  max-width: var(--medida);
+  margin-bottom: var(--s4);
+  font-size: var(--t-md);
+  line-height: 1.62;
+}
+
+.parrafo--ancho {
+  max-width: 78ch;
+}
+
+.entradilla {
+  font-size: var(--t-lg);
+  line-height: 1.4;
+  font-weight: 500;
+  max-width: 46ch;
+  color: var(--texto);
+}
+
+.pie {
+  font-size: var(--t-xs);
+  line-height: 1.5;
+  color: var(--texto-2);
+  margin-top: var(--s4);
+  max-width: 84ch;
+}
+
+.pie a {
+  color: var(--acento);
+  text-underline-offset: 2px;
+}
+
+/* ── Regla horizontal, como las del informe ────────────────── */
+
+.regla {
+  height: 2px;
+  background: var(--texto);
+  border: 0;
+  margin-block: var(--s4);
+  opacity: 0.85;
+}
+
+.regla--fina {
+  height: 1px;
+  background: var(--regla);
+  opacity: 1;
+}
+
+/* ── Cita textual: la voz del documento ────────────────────── */
+
+.cita {
+  font-family: var(--serif);
+  font-size: var(--t-md);
+  line-height: 1.62;
+  max-width: 68ch;
+  padding-left: var(--s5);
+  border-left: 3px solid var(--acento);
+  color: var(--texto);
+}
+
+.cita p {
+  margin-bottom: var(--s3);
+}
+
+.cita__fuente {
+  display: block;
+  font-family: var(--sans);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--texto-2);
+  margin-top: var(--s3);
+}
+
+/* ── Bloque de dato ────────────────────────────────────────── */
+
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5) var(--s8);
+  margin-block: var(--s5);
+}
+
+.dato__valor {
+  font-family: var(--cartel);
+  font-size: var(--t-3xl);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+  display: block;
+}
+
+.dato__valor--sobrio {
+  color: var(--titulo);
+}
+
+.dato__etiqueta {
+  display: block;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--texto-2);
+  max-width: 22ch;
+  margin-top: var(--s2);
+  line-height: 1.35;
+}
+
+/* ── Grillas ───────────────────────────────────────────────── */
+
+.duo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s7);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .duo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s8);
+  }
+  .duo--40-60 {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  }
+  .duo--60-40 {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 4fr);
+  }
+}
+
+/* ── Lista de puntos de lectura ────────────────────────────── */
+
+.puntos {
+  display: grid;
+  gap: var(--s3);
+  max-width: 70ch;
+}
+
+.puntos li {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  gap: var(--s3);
+  align-items: start;
+  font-size: var(--t-base);
+  line-height: 1.55;
+}
+
+.puntos li::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin-top: 0.55em;
+  background: var(--marca);
+}
+
+/* ── Barra de progreso de tiempo ───────────────────────────── */
+
+.reloj {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--turquesa);
+  z-index: 45;
+  transition: width var(--transicion);
+  pointer-events: none;
+}
+
+/* ── Ayuda de teclado ──────────────────────────────────────── */
+
+.teclas {
+  position: fixed;
+  left: clamp(1.5rem, 6vw, 6rem);
+  bottom: var(--s5);
+  display: flex;
+  gap: var(--s4);
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+  z-index: 30;
+  align-items: center;
+  transition: opacity 300ms;
+}
+
+.teclas[data-oculto='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+kbd {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--regla);
+  border-bottom-width: 2px;
+  padding: 1px 6px;
+  color: var(--texto-2);
+}
+
+/* ── Índice general ────────────────────────────────────────── */
+
+.indice {
+  position: fixed;
+  inset: 0;
+  right: var(--riel);
+  background: var(--tinta);
+  color: #ece9e6;
+  z-index: 50;
+  overflow-y: auto;
+  padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.indice__grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1px;
+  background: #3d3836;
+  border: 1px solid #3d3836;
+  margin-top: var(--s5);
+}
+
+.indice__item {
+  background: var(--tinta);
+  padding: var(--s4);
+  text-align: left;
+  display: grid;
+  gap: var(--s2);
+  align-content: start;
+  min-height: 118px;
+  transition: background 160ms;
+}
+
+.indice__item:hover,
+.indice__item:focus-visible {
+  background: #2e2926;
+}
+
+.indice__item[data-actual='true'] {
+  background: #2e2926;
+  box-shadow: inset 3px 0 0 var(--turquesa);
+}
+
+.indice__num {
+  font-size: var(--t-xs);
+  font-weight: 700;
+  color: var(--turquesa);
+  font-variant-numeric: tabular-nums;
+}
+
+.indice__titulo {
+  font-size: var(--t-base);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.indice__bloque {
+  font-size: var(--t-xs);
+  color: #9a9490;
+}
+
+/* ── Botón sobrio ──────────────────────────────────────────── */
+
+.boton {
+  border: 2px solid currentColor;
+  padding: 0.55em 1.1em;
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--acento);
+  transition: background 160ms, color 160ms;
+}
+
+.boton:hover,
+.boton:focus-visible {
+  background: var(--acento);
+  color: var(--fondo);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Accesibilidad y respuesta
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Proyectores de sala: 1024×768 y similares. Recuperar el aire vertical del
+   padding evita que las láminas más densas queden con barra de desplazamiento. */
+@media (max-height: 820px) {
+  .lamina {
+    padding-block: clamp(0.75rem, 2.5vh, 1.75rem);
+  }
+  .datos {
+    gap: var(--s4) var(--s7);
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --riel: 34px;
+  }
+  .lamina {
+    align-content: start;
+  }
+  .teclas {
+    display: none;
+  }
+}
+
+.solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

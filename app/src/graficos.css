@@ -1,0 +1,600 @@
+/* ═══════════════════════════════════════════════════════════════
+   Gráficos
+   Marcas finas, rejilla recesiva, etiquetas directas, 2px de
+   separación entre rellenos contiguos. Sin sombras ni degradados.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Barras ────────────────────────────────────────────────── */
+
+.barras {
+  display: grid;
+  gap: var(--s4);
+}
+
+.barras__fila {
+  display: grid;
+  gap: 6px;
+  cursor: default;
+}
+
+.barras__cabeza {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s4);
+}
+
+.barras__actor {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--texto);
+  line-height: 1.3;
+}
+
+.barras__fila[data-enfasis='true'] .barras__actor {
+  font-weight: 700;
+}
+
+.barras__nota {
+  color: var(--texto-2);
+  font-weight: 400;
+}
+
+.barras__valor {
+  font-weight: 700;
+  font-size: var(--t-md);
+  color: var(--texto);
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+}
+
+.barras__pct {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--texto-2);
+}
+
+.barras__pista {
+  height: 16px;
+  background: var(--superficie);
+}
+
+.barras__marca {
+  height: 100%;
+  background: var(--marca-2);
+  border-radius: 0 3px 3px 0;
+  transition: opacity 160ms;
+}
+
+.barras__fila[data-enfasis='true'] .barras__marca {
+  background: var(--marca);
+}
+
+/* ── Proporción ────────────────────────────────────────────── */
+
+.proporcion__pista {
+  height: 34px;
+  background: var(--superficie);
+  display: flex;
+}
+
+.proporcion__parte {
+  height: 100%;
+  background: var(--marca);
+  border-right: 2px solid var(--fondo); /* la separación de 2px */
+}
+
+.proporcion__leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3) var(--s6);
+  margin-top: var(--s4);
+  font-size: var(--t-sm);
+}
+
+.proporcion__item {
+  display: flex;
+  gap: var(--s3);
+  align-items: baseline;
+}
+
+.proporcion__muestra {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  transform: translateY(2px);
+}
+
+.proporcion__muestra--parte {
+  background: var(--marca);
+}
+
+.proporcion__muestra--resto {
+  background: var(--superficie);
+  border: 1px solid var(--regla);
+}
+
+.proporcion__nota {
+  color: var(--texto-2);
+  font-style: normal;
+}
+
+/* ── Matriz de modalidades ─────────────────────────────────── */
+
+.matriz__grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 2px; /* separación entre rellenos contiguos */
+}
+
+.matriz__celda {
+  background: var(--superficie);
+  padding: var(--s4);
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  min-height: 108px;
+  border-top: 3px solid transparent;
+}
+
+.matriz__celda[data-presente='true'] {
+  border-top-color: var(--marca);
+}
+
+.matriz__celda[data-presente='false'] {
+  opacity: 0.5;
+}
+
+.matriz__celda[data-destacado='true'] {
+  background: var(--marca);
+  border-top-color: var(--texto);
+}
+
+.matriz__signo {
+  font-size: var(--t-base);
+  color: var(--marca);
+  line-height: 1;
+}
+
+.matriz__celda[data-destacado='true'] .matriz__signo,
+.matriz__celda[data-destacado='true'] .matriz__nombre,
+.matriz__celda[data-destacado='true'] .matriz__estado {
+  color: var(--fondo);
+}
+
+.matriz__nombre {
+  font-size: var(--t-base);
+  font-weight: 600;
+  line-height: 1.22;
+  color: var(--texto);
+}
+
+.matriz__estado {
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+}
+
+/* ── Rangos de período ─────────────────────────────────────── */
+
+.rangos {
+  display: grid;
+  gap: var(--s5);
+}
+
+.rangos__eje {
+  position: relative;
+  height: 18px;
+  border-bottom: 1px solid var(--regla);
+}
+
+.rangos__tick {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+}
+
+.rangos__fila {
+  display: grid;
+  gap: var(--s3);
+}
+
+.rangos__pista {
+  position: relative;
+  height: 40px;
+  background: var(--superficie);
+}
+
+.rangos__barra {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--marca);
+  display: flex;
+  align-items: center;
+  padding-inline: var(--s3);
+  border-inline: 2px solid var(--fondo);
+}
+
+.rangos__cifra {
+  font-family: var(--cartel);
+  font-size: var(--t-lg);
+  color: var(--fondo);
+  line-height: 1;
+}
+
+.rangos__meta {
+  font-size: var(--t-sm);
+  display: grid;
+  gap: 2px;
+}
+
+.rangos__detalle {
+  color: var(--texto-2);
+}
+
+.rangos__fuente {
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+}
+
+/* ── Diagrama de alianza ───────────────────────────────────── */
+
+.alianza {
+  margin: 0;
+}
+
+.alianza__svg {
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+}
+
+.alianza__t1 {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--texto);
+}
+
+.alianza__t2 {
+  font-family: var(--sans);
+  font-size: 12px;
+  fill: var(--texto-2);
+}
+
+.alianza__t3 {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  fill: var(--texto-2);
+}
+
+.alianza__t4 {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--fondo);
+}
+
+.alianza__t5 {
+  font-family: var(--sans);
+  font-size: 11px;
+  fill: var(--fondo);
+  opacity: 0.8;
+}
+
+/* ── Mapa nacional, vectorizado del documento ──────────────── */
+
+.mapaco {
+  margin: 0;
+}
+
+.mapaco__svg {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  display: block;
+  overflow: visible;
+}
+
+.mapaco__tierra {
+  fill: var(--regla);
+}
+
+.mapaco__mun {
+  cursor: default;
+}
+
+.mapaco__punto {
+  fill: var(--pizarra);
+  transition: fill 160ms;
+}
+
+.mapaco__mun:hover .mapaco__punto {
+  fill: var(--texto);
+}
+
+.mapaco__mun[data-destacado='true'] .mapaco__punto {
+  fill: var(--grave);
+}
+
+.mapaco__anillo {
+  fill: none;
+  stroke: var(--grave);
+  stroke-width: 4;
+}
+
+.mapaco__etq {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 600;
+  fill: var(--texto);
+  paint-order: stroke fill;
+  stroke: var(--fondo);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+
+.mapaco__etq--fuerte {
+  font-size: 32px;
+  font-weight: 700;
+  fill: var(--grave);
+}
+
+/* Definición del módulo, en versión compacta */
+.terr__def {
+  border-left: 3px solid var(--acento);
+  padding: var(--s3) 0 var(--s3) var(--s4);
+  margin-bottom: var(--s5);
+  max-width: 54ch;
+  font-family: var(--serif);
+}
+
+/* ── Diagrama del territorio ───────────────────────────────── */
+
+.terr {
+  margin: 0;
+  max-width: 560px;
+}
+
+.terr__zona {
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--texto-2);
+  padding-left: 30px;
+  margin-block: var(--s2);
+}
+
+.terr__eje {
+  display: grid;
+  border-left: 2px solid var(--regla);
+  margin-left: 7px;
+  padding-left: 0;
+}
+
+.terr__nodo {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s3);
+  padding: var(--s3) 0 var(--s3) 23px;
+}
+
+.terr__marca {
+  position: absolute;
+  left: -7px;
+  top: 1.15em;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--marca-2);
+}
+
+.terr__nodo[data-momento='1'] .terr__marca,
+.terr__nodo[data-momento='2'] .terr__marca,
+.terr__nodo[data-momento='3'] .terr__marca {
+  background: var(--marca);
+}
+
+.terr__nodo[data-cabecera='true'] {
+  border-block: 1px solid var(--regla);
+  background: var(--superficie);
+}
+
+.terr__nodo[data-cabecera='true'] .terr__marca {
+  border-radius: 0;
+  background: var(--texto);
+  width: 14px;
+  height: 14px;
+  left: -8px;
+}
+
+.terr__texto {
+  display: grid;
+  gap: 1px;
+  flex: 1;
+}
+
+.terr__nombre {
+  font-size: var(--t-base);
+  font-weight: 600;
+  color: var(--texto);
+  line-height: 1.2;
+}
+
+.terr__nodo[data-cabecera='true'] .terr__nombre {
+  font-size: var(--t-md);
+  font-weight: 700;
+}
+
+.terr__sector {
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+  line-height: 1.3;
+}
+
+.terr__momento {
+  font-size: var(--t-xs);
+  font-weight: 700;
+  color: var(--marca);
+  white-space: nowrap;
+  flex: none;
+}
+
+.terr__momento--cab {
+  color: var(--texto-2);
+  font-weight: 500;
+}
+
+/* ── Línea de tiempo ───────────────────────────────────────── */
+
+.tiempo {
+  margin: 0;
+  padding-block: var(--s5) 0;
+}
+
+.tiempo__pista {
+  position: relative;
+}
+
+.tiempo__eje {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--regla);
+}
+
+.tiempo__anio {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: var(--t-xs);
+  color: var(--texto-2);
+}
+
+/* Etiqueta siempre visible: quien mira desde el público no puede pasar el
+   mouse por encima. */
+.tiempo__etq {
+  position: absolute;
+  width: 15.5%;
+  min-width: 130px;
+  display: grid;
+  gap: 1px;
+  font-size: var(--t-xs);
+  line-height: 1.28;
+  color: var(--texto-2);
+  padding-inline: 2px;
+}
+
+.tiempo__etq strong {
+  color: var(--texto);
+  font-size: 0.82rem;
+}
+
+.tiempo__guia {
+  position: absolute;
+  width: 1px;
+  background: var(--regla);
+}
+
+.tiempo__marca {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  background: var(--marca-2);
+}
+
+.tiempo__hito[data-tipo='momento'] .tiempo__marca {
+  background: var(--marca);
+  width: 16px;
+  height: 16px;
+}
+
+.tiempo__hito[data-tipo='momento'] .tiempo__etq strong {
+  color: var(--marca);
+}
+
+.tiempo__hito[data-tipo='justicia'] .tiempo__marca {
+  background: var(--fondo);
+  border: 3px solid var(--grave);
+}
+
+.tiempo__hito[data-tipo='disputado'] .tiempo__marca {
+  background: transparent;
+  border: 2px dashed var(--texto-2);
+}
+
+.tiempo__hito[data-tipo='disputado'] .tiempo__etq {
+  font-style: italic;
+}
+
+/* ── Tabla de datos, alternativa accesible al gráfico ──────── */
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-sm);
+  margin-top: var(--s4);
+}
+
+.tabla th,
+.tabla td {
+  text-align: left;
+  padding: var(--s2) var(--s3);
+  border-bottom: 1px solid var(--regla);
+}
+
+.tabla th {
+  font-weight: 600;
+  color: var(--texto-2);
+}
+
+.tabla td:last-child,
+.tabla th:last-child {
+  text-align: right;
+}
+
+/* ── Fichas de víctimas nombradas ──────────────────────────── */
+
+.nombres {
+  display: grid;
+  gap: 2px;
+  max-width: 46ch;
+}
+
+.nombres li {
+  background: var(--superficie);
+  padding: var(--s3) var(--s4);
+  font-size: var(--t-base);
+  font-weight: 500;
+  border-left: 3px solid var(--marca);
+}
+
+.nombres li[data-anonimo='true'] {
+  border-left-color: var(--marca-2);
+  color: var(--texto-2);
+  font-style: italic;
+}
+
+/* ── Aviso de dato en disputa ──────────────────────────────── */
+
+.disputa {
+  border: 2px dashed var(--texto-2);
+  padding: var(--s5);
+  max-width: 74ch;
+}
+
+.disputa__rotulo {
+  font-size: var(--t-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--grave);
+  display: block;
+  margin-bottom: var(--s3);
+}
