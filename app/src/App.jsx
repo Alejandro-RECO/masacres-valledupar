@@ -102,7 +102,7 @@ export default function App() {
       onTouchEnd={onTouchEnd}
     >
       <h1 className="solo-lectores">
-        Masacres en Valledupar — Cátedra Basta Ya. Lámina {i + 1} de {total}: {actual.titulo}
+        Masacres en Valledupar — Cátedra de Paz. Lámina {i + 1} de {total}: {actual.titulo}
       </h1>
 
       {SECCIONES.map((s, n) => (

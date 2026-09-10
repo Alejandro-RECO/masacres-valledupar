@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Presentación interactiva — Masacres en Valledupar, Cátedra Basta Ya",
+  "description": "Presentación interactiva — Masacres en Valledupar, Cátedra de Paz",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

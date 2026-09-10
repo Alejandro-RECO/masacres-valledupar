@@ -1,4 +1,4 @@
-# Masacres en Valledupar — Cátedra Basta Ya
+# Masacres en Valledupar — Cátedra de Paz
 
 Presentación interactiva para la asignatura **Cátedra de Paz**. Analiza tres
 momentos de violencia en la zona rural de Valledupar (Cesar) con el marco

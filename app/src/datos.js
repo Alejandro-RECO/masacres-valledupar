@@ -14,6 +14,11 @@
    A. Marco conceptual y cifras nacionales — Módulo 1
    ───────────────────────────────────────────────────────────── */
 
+/** La asignatura. No confundir con el título del documento base: el curso es
+ *  Cátedra de Paz, y «Cátedra Basta Ya» es el nombre del programa educativo del
+ *  CNMH al que pertenece el módulo que se analiza. */
+export const CURSO = 'Cátedra de Paz'
+
 export const MODULO = {
   titulo: 'Módulo 1 — Cátedra Basta Ya',
   subtitulo:

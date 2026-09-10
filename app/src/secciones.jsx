@@ -26,7 +26,7 @@ import { Encabezado, Cita, Fuente, Dato, Puntos, Nombres } from './componentes/T
 const Portada = () => (
   <>
     <Encabezado periodo="1985 – 2025" lugar="Valledupar, Cesar" />
-    <p className="rotulo">{MODULO.titulo}</p>
+    <p className="rotulo">{CURSO}</p>
     <h1 className="cartel">
       Masacres
       <br />
@@ -40,6 +40,8 @@ const Portada = () => (
       </p>
       <div>
         <p className="pie" style={{ marginTop: 0 }}>
+          Documento base: {MODULO.titulo}
+          <br />
           {MODULO.subtitulo}
           <br />
           {MODULO.entidad}
@@ -52,7 +54,7 @@ const Portada = () => (
 const PorQueValledupar = () => (
   <>
     <Encabezado periodo="Módulo 1, pág. 11" lugar="Infografía de masacres del propio documento" />
-    <h2 className="titulo">No elegimos Valledupar. El módulo ya la había señalado.</h2>
+    <h2 className="titulo">Centrémonos en Valledupar, frente a lo que muestra el informe.</h2>
     <div className="duo duo--40-60">
       <div>
         <p className="parrafo">

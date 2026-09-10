@@ -1,4 +1,4 @@
-# Plan de diseño — Cátedra Basta Ya · Masacres en Valledupar
+# Plan de diseño — Cátedra de Paz · Masacres en Valledupar
 
 Este documento fija el sistema visual antes de escribir código. Todos los valores
 de color están **muestreados directamente del PDF** `No mataras/modulo1.pdf`
@@ -10,7 +10,8 @@ inventado ni "inspirado en": se extrajeron píxel a píxel con PyMuPDF.
 ## 1. Sujeto, audiencia y trabajo del diseño
 
 **Sujeto.** Las masacres cometidas en la zona rural de Valledupar, leídas con el
-marco conceptual del Módulo 1 de la Cátedra Basta Ya.
+marco conceptual del Módulo 1 de la Cátedra Basta Ya (CNMH), que es el
+documento base de la asignatura.
 
 **Audiencia.** El curso de Cátedra de Paz y el docente. Personas que no conocen
 el caso y que deben salir entendiendo cómo un concepto del informe se materializa
