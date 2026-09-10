@@ -1,4 +1,5 @@
 import {
+  CURSO,
   MODULO,
   DEFINICION_MASACRE,
   MUERTES_CONFLICTO,
@@ -308,8 +309,8 @@ const Atanquez = () => (
     <div className="duo duo--60-40">
       <div>
         <ol className="puntos">
-          {MOMENTO_2.hechos.map((h) => (
-            <li key={h.codigo}>
+          {MOMENTO_2.hechos.map((h, i) => (
+            <li key={`${h.codigo}-${i}`}>
               <span>{h.texto}</span>
             </li>
           ))}
