@@ -266,25 +266,31 @@
   fill: var(--texto-2);
 }
 
+/* El halo del color del fondo abre un hueco en la línea horizontal, para que
+   la etiqueta rotule la unión en vez de quedar encerrada por el trazo. */
 .alianza__t3 {
   font-family: var(--sans);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
   fill: var(--texto-2);
+  paint-order: stroke fill;
+  stroke: var(--fondo);
+  stroke-width: 10px;
+  stroke-linejoin: round;
 }
 
 .alianza__t4 {
   font-family: var(--sans);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   fill: var(--fondo);
 }
 
 .alianza__t5 {
   font-family: var(--sans);
-  font-size: 11px;
+  font-size: 12px;
   fill: var(--fondo);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* ── Mapa nacional, vectorizado del documento ──────────────── */
@@ -343,6 +349,38 @@
   font-size: 32px;
   font-weight: 700;
   fill: var(--grave);
+}
+
+/* ── Las doce comunidades del resguardo kankuamo ───────────── */
+
+.comunidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2px;
+}
+
+.comunidades li {
+  background: var(--superficie);
+  padding: var(--s3) var(--s4);
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--texto-2);
+  display: grid;
+  gap: 2px;
+}
+
+/* La comunidad donde ocurrió la masacre se separa del resto: ese es el
+   vínculo entre el dato demográfico y el hecho. */
+.comunidades li[data-marcada='true'] {
+  background: var(--marca);
+  color: var(--fondo);
+  font-weight: 700;
+}
+
+.comunidades__nota {
+  font-size: var(--t-xs);
+  font-weight: 500;
+  opacity: 0.85;
 }
 
 /* Definición del módulo, en versión compacta */

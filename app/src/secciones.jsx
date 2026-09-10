@@ -271,27 +271,42 @@ const NombresDiluvio = () => (
 
 const PuebloKankuamo = () => (
   <>
-    <Encabezado periodo="Sierra Nevada de Santa Marta" lugar="Resguardo kankuamo, zona rural de Valledupar" />
-    <h2 className="titulo">Un pueblo de seis mil personas, en doce comunidades.</h2>
+    <Encabezado
+      periodo="Sierra Nevada de Santa Marta"
+      lugar="Resguardo kankuamo, zona rural de Valledupar"
+      bloque="Momento 2"
+    />
+    <h2 className="titulo">La masacre que sigue no cayó sobre cuatro personas. Cayó sobre un pueblo.</h2>
     <div className="duo duo--40-60">
       <div>
         <div className="datos">
-          <Dato valor={MOMENTO_2.corteIDH.poblacion} etiqueta="habitantes, según la Corte IDH en 2004" />
-          <Dato valor={MOMENTO_2.corteIDH.comunidades.length} etiqueta="comunidades" sobrio />
+          <Dato valor={MOMENTO_2.corteIDH.poblacion} etiqueta="habitantes tenía el pueblo kankuamo en 2004" />
+          <Dato
+            valor={`${MOMENTO_2.desplazamiento.pct}%`}
+            etiqueta="terminó desplazado de su territorio"
+            sobrio
+          />
         </div>
         <p className="parrafo">
-          El {MOMENTO_2.desplazamiento.pct}% de esa población terminó desplazada.
+          Atánquez es una de sus doce comunidades. Allí ocurrió la masacre del 8 de diciembre
+          de 2002 — pero el ataque no se detuvo en ese día ni en ese pueblo.
+        </p>
+        <p className="parrafo">
+          En julio de 2004 la Corte Interamericana tuvo que ordenarle al Estado colombiano que
+          protegiera la vida de <strong>todos</strong> los miembros del pueblo kankuamo. Esa
+          orden no se dicta por un hecho aislado.
         </p>
         <Fuente codigo={MOMENTO_2.corteIDH.codigo} url={MOMENTO_2.corteIDH.url}>
           Corte Interamericana de Derechos Humanos, resolución del {MOMENTO_2.corteIDH.fecha}
         </Fuente>
       </div>
       <div>
-        <p className="rotulo">Las doce comunidades</p>
-        <ul className="puntos" style={{ gridTemplateColumns: '1fr 1fr', display: 'grid' }}>
+        <p className="rotulo">Las doce comunidades del resguardo</p>
+        <ul className="comunidades">
           {MOMENTO_2.corteIDH.comunidades.map((c) => (
-            <li key={c}>
-              <span>{c}</span>
+            <li key={c} data-marcada={c === 'Atánquez' ? 'true' : 'false'}>
+              {c}
+              {c === 'Atánquez' && <span className="comunidades__nota">la masacre ocurrió aquí</span>}
             </li>
           ))}
         </ul>
@@ -409,28 +424,47 @@ const LaPopa = () => {
   return (
     <>
       <Encabezado periodo={p.fechaSentencia} lugar={`${p.unidad}, ${p.sede}`} bloque="Momento 2" />
-      <h2 className="titulo">La sentencia que lo declaró probado.</h2>
-      <div className="duo duo--40-60">
+      <h2 className="titulo">Y un tribunal lo declaró probado.</h2>
+      <div className="duo duo--60-40">
         <div>
-          <div className="datos">
-            <Dato valor={p.victimas} etiqueta="civiles asesinados y presentados como bajas en combate" />
-            <Dato valor={p.sancionados} etiqueta="militares sancionados" sobrio />
-          </div>
-          <p className="parrafo">
-            Entre las víctimas acreditadas: {p.victimasEtnicas.map((v) => `${v.n} ${v.pueblo.toLowerCase()}`).join(', ')}.
-          </p>
-          <p className="pie">{p.nota}</p>
+          <DiagramaAlianza
+            izquierda={{ titulo: 'Batallón de Artillería No. 2 «La Popa»', detalle: `Fuerza pública · ${p.sede}` }}
+            derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'Paramilitares' }}
+            centro="alianza y connivencia sistemática"
+            resultado={`${p.victimas} civiles asesinados`}
+            nota="y presentados como bajas en combate, entre 2002 y 2005"
+          />
           <Fuente codigo={p.codigo} url={p.url}>
             {p.organo}, sentencia del {p.fechaSentencia}
           </Fuente>
         </div>
         <div>
-          <DiagramaAlianza
-            izquierda={{ titulo: 'Batallón La Popa', detalle: `Fuerza pública · ${p.sede}` }}
-            derecha={{ titulo: 'Bloque Norte de las AUC', detalle: 'Paramilitares' }}
-            centro="alianza y connivencia sistemática"
-            resultado={`${p.victimas} civiles asesinados`}
-          />
+          <div className="datos">
+            <Dato valor={p.sancionados} etiqueta="militares sancionados, todos en retiro" />
+          </div>
+          <ul className="puntos" style={{ marginBottom: 'var(--s5)' }}>
+            {p.composicion.map((c) => (
+              <li key={c.rango}>
+                <span>
+                  {c.n} {c.rango.toLowerCase()}
+                </span>
+              </li>
+            ))}
+            <li>
+              <span>{p.sancionMaxima}</span>
+            </li>
+          </ul>
+          <p className="rotulo">Entre las víctimas acreditadas</p>
+          <ul className="puntos">
+            {p.victimasEtnicas.map((v) => (
+              <li key={v.pueblo}>
+                <span>
+                  <strong>{v.n}</strong> — {v.pueblo}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="pie">{p.nota}</p>
         </div>
       </div>
     </>
